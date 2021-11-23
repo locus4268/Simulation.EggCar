@@ -1,0 +1,176 @@
+#define DISTANCE 1.8
+#define HEIGHT 0.9
+#define DEGREE 26.565
+#include <stdio.h>
+#include <math.h>
+
+int main (void)
+{
+	char answer;
+
+	printf("Console Egg Automobile Simulation in C\n");
+	printf("---------------------------------------------\n");
+	printf("\nChoose an option from the following list:\n\n");
+	printf("\tb - Building Simulation\n");
+	printf("\tp - Building Perfectly Cracked Simulation\n");
+	printf("\td - Drag Coefficient Chart\n");
+	printf("\th - Help : How to use\n\n");
+	printf("Your option? ");
+	scanf("%c", &answer);
+	fseek(stdin, 0, SEEK_SET);
+	printf("\n");
+
+	double mass = 0;
+	double s_area = 0;
+	double air_mass = 1.18;
+	double drag_coefficient = 1.05;
+	double crash_time = 1;
+	double Fnet = 0;
+	double Impulse = 0;
+
+	if (answer == 'b') goto Building;
+	else if (answer == 'p') goto Perfect;
+	else if (answer == 'd') goto Drag;
+	else if (answer == 'h') goto Help;
+	else
+	{
+		printf("Scanf error. Please restart program.");
+		return -1;
+	}
+
+
+Building:;
+
+	printf("Enter the mass(weight) to build Simulation [kg] : ");
+	scanf("%lf", &mass);
+	printf("Enter the surface area [m^2] : ");
+	scanf("%lf", &s_area);
+	printf("Enter the air mass : ");
+	scanf("%lf", &air_mass);
+	printf("Enter the drag coefficient : ");
+	scanf("%lf", &drag_coefficient);
+	printf("Enter the crash time [s] : ");
+	scanf("%lf", &crash_time);
+
+
+	Fnet = 9.8 * mass * sin(DEGREE) - 9.8 * air_mass * drag_coefficient * s_area * HEIGHT;
+	Impulse = Fnet * crash_time;
+
+	if (Impulse >= 0.003794)
+	{
+		printf("\x1b[31m" "Failed." "\x1b[0m");
+	}
+	else if (Impulse < 0.003794)
+	{
+		printf("\x1b[32m" "Succeeded." "\x1b[0m");
+	}
+	else
+	{
+		printf("Calculate error. Please restart program.");
+		return -1;
+	}
+
+	return 0;
+
+Perfect:;
+
+	printf("Enter the mass(weight) to build Simulation [kg] : ");
+	scanf("%lf", &mass);
+	printf("Enter the surface area [m^2] : ");
+	scanf("%lf", &s_area);
+	printf("Enter the air mass : ");
+	scanf("%lf", &air_mass);
+	printf("Enter the drag coefficient : ");
+	scanf("%lf", &drag_coefficient);
+	printf("Enter the crash time [s] : ");
+	scanf("%lf", &crash_time);
+
+
+	Fnet = mass * sin(DEGREE) - 9.8 * air_mass * drag_coefficient * s_area * HEIGHT;
+	Impulse = Fnet * crash_time;
+
+	if (Impulse >= 0.008809 * 4)
+	{
+		printf("\x1b[31m" "Failed." "\x1b[0m");
+	}
+	else if (Impulse < 0.008809 * 4)
+	{
+		printf("\x1b[32m" "Succeeded." "\x1b[0m");
+	}
+	else
+	{
+		printf("Calculate error. Please restart program.");
+		return -1;
+	}
+
+	return 0;
+
+Drag:;
+
+	printf("----------Drag Coefficient Chart----------\n\n");
+	printf("       Shape        Drag Coefficient\n\n");
+	printf("       sphere             0.47\n");
+	printf("    half-sphere           0.42\n");
+	printf("        cone              0.50\n");
+	printf("        cube              1.05\n");
+	printf("    angled-cube           0.80\n");
+	printf("   long-cylinder          0.82\n");
+	printf("   short-cylinder         1.15\n");
+	printf("  streamlined-body        0.04\n\n");
+
+	printf("\nChoose an option from the following list:\n\n");
+	printf("\tb - Building Simulation\n");
+	printf("\tp - Building Perfectly Cracked Simulation\n");
+	printf("\td - Drag Coefficient Chart\n");
+	printf("\th - Help : How to use\n\n");
+	printf("Your option? ");
+	scanf("%c", &answer);
+	fseek(stdin, 0, SEEK_SET);
+	printf("\n");
+
+	if (answer == 'b') goto Building;
+	else if (answer == 'p') goto Perfect;
+	else if (answer == 'd') goto Drag;
+	else if (answer == 'h') goto Help;
+	else
+	{
+		printf("Scanf error. Please restart program.");
+		return -1;
+	}
+
+Help:;
+
+	printf("----------How to use----------\n\n");
+	printf("1. Choose your opinion to start Simulation.\n");
+	printf("     If you choose perfectly cracked Simulation,\n");
+	printf("     It will simulate whether the egg is perfectly cracked.\n");
+	printf("2. Enter the data that will be calculated.\n");
+	printf("     mass(weight) is truely weight.\n");
+	printf("     surface area has to be calculated with all the front side surface area.\n");
+	printf("     general air mass is 1.18g/l.\n");
+	printf("     general drag coefficient is 1.05.\n");
+	printf("     general crash time is 1second.\n");
+	printf("3. Check the result.\n");
+	printf("\x1b[32m" "     Succeeded." "\x1b[0m" "means that the egg wasn't cracked.\n");
+	printf("\x1b[31m" "     Failed." "\x1b[0m" "means that the egg was cracked.\n\n\n");
+
+
+
+	printf("\nChoose an option from the following list:\n\n");
+	printf("\tb - Building Simulation\n");
+	printf("\tp - Building Perfectly Cracked Simulation\n");
+	printf("\td - Drag Coefficient Chart\n");
+	printf("Your option? ");
+	scanf("%c", &answer);
+	fseek(stdin, 0, SEEK_SET);
+	printf("\n");
+
+	if (answer == 'b') goto Building;
+	else if (answer == 'p') goto Perfect;
+	else if (answer == 'd') goto Drag;
+	else
+	{
+		printf("Scanf error. Please restart program.");
+		return -1;
+	}
+}
